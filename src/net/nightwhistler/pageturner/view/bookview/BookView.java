@@ -41,6 +41,7 @@ import android.view.MotionEvent;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.view.ActionMode;
+import com.example.textjustify.TextViewEx;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import net.nightwhistler.htmlspanner.FontFamily;
@@ -1192,7 +1193,7 @@ public class BookView extends ScrollView implements LinkTagHandler.LinkCallBack 
 		}
 	}
 
-	public static class InnerView extends TextView {
+	public static class InnerView extends TextViewEx {
 
 		private BookView bookView;
 
@@ -1200,10 +1201,15 @@ public class BookView extends ScrollView implements LinkTagHandler.LinkCallBack 
 
 		public InnerView(Context context, AttributeSet attributes) {
 			super(context, attributes);
+            wrapEnabled = true;
 		}
 
+        public void setText (String st) {
+            setText (st, true);
+        }
+
 		protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-			super.onSizeChanged(w, h, oldw, oldh);
+			super.onSizeChanged (w, h, oldw, oldh);
 			bookView.onInnerViewResize();
 		}
 
